@@ -1,10 +1,8 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "habeets-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.less"],
+  selector: 'habeets-root',
+  template: '<router-outlet></router-outlet>',
+  styleUrls: ['./app.component.less'],
 })
-export class AppComponent {
-  title = "frontend-habeets";
-}
+export class AppComponent {}
