@@ -19,7 +19,11 @@
           "apps/frontend-habeets/src/favicon.ico",
           "apps/frontend-habeets/src/assets"
         ],
-        "styles": ["apps/frontend-habeets/src/styles.less"],
+        "styles": [
+          "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
+          "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
+          "apps/frontend-habeets/src/styles.less"
+        ],
         "scripts": []
       },
       "configurations": {

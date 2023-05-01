@@ -1,1 +1,17 @@
-<p>auth-ui works!</p>
+<section class="page">
+  <section class="card">
+    <form class="b-form" [formGroup]="authForm">
+      <tui-input formControlName="email" class="tui-space_bottom-6">
+        email
+        <input tuiTextfield type="email" />
+      </tui-input>
+      <tui-error *ngIf="emailError" [error]="emailError"></tui-error>
+
+      <tui-input formControlName="password" class="tui-space_bottom-2">
+        password
+        <input tuiTextfield type="password" />
+      </tui-input>
+      <tui-error *ngIf="passwordError" [error]="passwordError"></tui-error>
+    </form>
+  </section>
+</section>
