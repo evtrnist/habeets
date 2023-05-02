@@ -7,6 +7,7 @@ body {
   height: 100%;
   width: 100%;
   --tui-primary: var(--tui-support-10);
+  --tui-secondary: var(--tui-support-14);
 }
 
 body {
@@ -23,4 +24,13 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+[tuiWrapper][data-appearance='custom'] {
+  color: #fff;
+  background: var(--tui-primary);
+
+  .wrapper-hover({
+    background: var(--tui-secondary);
+  });
 }

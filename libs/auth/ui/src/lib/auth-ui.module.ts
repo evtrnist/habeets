@@ -5,7 +5,7 @@ import { TuiInputModule } from '@taiga-ui/kit';
 import { RouterModule } from '@angular/router';
 import { AuthUiComponent } from './auth-ui.component';
 import { authRoutes } from './auth-routes';
-import { TuiErrorModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiErrorModule } from '@taiga-ui/core';
 
 @NgModule({
   imports: [
@@ -14,6 +14,7 @@ import { TuiErrorModule } from '@taiga-ui/core';
     ReactiveFormsModule,
     TuiInputModule,
     TuiErrorModule,
+    TuiButtonModule,
   ],
   declarations: [AuthUiComponent, AuthUiComponent],
 })
