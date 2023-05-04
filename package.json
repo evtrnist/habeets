@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start frontend": "nx serve frontend-habeets"
+    "start frontend": "nx serve frontend-habeets",
+    "build": "ng build",
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
