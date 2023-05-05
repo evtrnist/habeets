@@ -5,4 +5,7 @@ export const appRoutes: Route[] = [
     path: 'auth',
     loadChildren: () => import('@habeets/auth/ui').then((m) => m.AuthUiModule),
   },
+  {
+    path: 'dashboard',
+  },
 ];
