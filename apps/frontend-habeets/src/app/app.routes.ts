@@ -8,4 +8,7 @@ export const appRoutes: Route[] = [
   {
     path: 'dashboard',
   },
+  {
+    path: '**',
+  },
 ];
