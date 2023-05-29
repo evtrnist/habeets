@@ -5,7 +5,7 @@ import { TuiInputModule } from '@taiga-ui/kit';
 import { RouterModule } from '@angular/router';
 import { AuthUiComponent } from './auth-ui.component';
 import { authRoutes } from './auth-routes';
-import { TuiButtonModule, TuiErrorModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiErrorModule, TuiLinkModule } from '@taiga-ui/core';
 
 @NgModule({
   imports: [
@@ -15,6 +15,7 @@ import { TuiButtonModule, TuiErrorModule } from '@taiga-ui/core';
     TuiInputModule,
     TuiErrorModule,
     TuiButtonModule,
+    TuiLinkModule,
   ],
   declarations: [AuthUiComponent, AuthUiComponent],
 })

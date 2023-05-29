@@ -13,8 +13,10 @@
 
 .card {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 70%;
-  min-height: 290px;
+  min-height: 360px;
   padding: 32px;
   background-color: var(--tui-base-01);
   border-radius: 24px;
@@ -24,7 +26,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex-basis: 100%;
+    flex-grow: 0.5;
     tui-error {
       position: absolute;
     }
@@ -33,4 +35,11 @@
   button {
     margin: 0 auto;
   }
+}
+
+.link {
+  flex-basis: auto;
+  flex-shrink: 0;
+  margin-left: auto;
+  font: var(--tui-font-text-xs);
 }

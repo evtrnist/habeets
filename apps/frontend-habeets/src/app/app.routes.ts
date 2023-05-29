@@ -6,12 +6,19 @@ export const appRoutes: Route[] = [
     loadChildren: () => import('@habeets/auth/ui').then((m) => m.AuthUiModule),
   },
   {
-    path: 'dashboard',
+    path: 'registration',
+    loadChildren: () =>
+      import('./registration/registration.module').then(
+        (m) => m.RegistrationModule
+      ),
   },
-  {
-    path: 'profile',
-  },
-  {
-    path: '**',
-  },
+  // {
+  //   path: 'dashboard',
+  // },
+  // {
+  //   path: 'profile',
+  // },
+  // {
+  //   path: '**',
+  // },
 ];
