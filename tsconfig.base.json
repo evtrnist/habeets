@@ -17,7 +17,8 @@
     "paths": {
       "@habeets/auth/core": ["libs/auth/core/src/index.ts"],
       "@habeets/auth/ui": ["libs/auth/ui/src/index.ts"],
-      "@habeets/common": ["libs/common/src/index.ts"]
+      "@habeets/common": ["libs/common/src/index.ts"],
+      "@habeets/registration/ui": ["libs/registration/ui/src/index.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]

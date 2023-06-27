@@ -8,9 +8,7 @@ export const appRoutes: Route[] = [
   {
     path: 'registration',
     loadChildren: () =>
-      import('./registration/registration.module').then(
-        (m) => m.RegistrationModule
-      ),
+      import('@habeets/registration/ui').then((m) => m.RegistrationUiModule),
   },
   // {
   //   path: 'dashboard',
