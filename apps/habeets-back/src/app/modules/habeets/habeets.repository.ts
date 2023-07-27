@@ -7,7 +7,7 @@ export class HabeetsRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   async createHabeet(params: { data: Prisma.HabeetCreateInput }): Promise<Habeet> {
-    const data = { params };
+    const { data } = params;
     return this.prismaService.habeet.create({ data });
   }
 }
