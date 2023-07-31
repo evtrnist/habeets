@@ -2,6 +2,10 @@ import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { PrismaModule } from 'apps/habeets-back/src/database/prisma.module';
+import { UsersModule } from '../users/users.module';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
+import { JwtStrategy } from './jwt.strategy';
 
 export const jwtSecret = 'zjP9h6ZI5LoblaSKClaRlaj';
 
@@ -13,8 +17,9 @@ export const jwtSecret = 'zjP9h6ZI5LoblaSKClaRlaj';
       secret: jwtSecret,
       signOptions: { expiresIn: '1d' },
     }),
+    UsersModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AuthController],
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule {}
