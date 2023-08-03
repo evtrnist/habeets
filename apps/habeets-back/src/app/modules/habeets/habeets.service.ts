@@ -1,29 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { HabeetsRepository } from './habeets.repository';
-import { Habeet, HabeetStat, Status, User } from '@prisma/client';
+import { Habeet, HabeetStat, Status } from '@prisma/client';
+import { CreateHabeetDto } from './dtos/create-habeet.dto';
 
 @Injectable()
 export class HabeetsService {
   constructor(private readonly habeetsRepository: HabeetsRepository) {}
 
-  async createHabeet({ title, userId }: { title: Habeet['title']; userId: User['id'] }): Promise<Habeet> {
-    const createdHabeet = await this.habeetsRepository.createHabeet({
-      data: {
-        title,
-        user: {
-          connect: {
-            id: userId,
-          },
-        },
-      },
-    });
-
-    return createdHabeet;
+  createHabeet(habeet: CreateHabeetDto): Promise<Habeet> {
+    return this.habeetsRepository.createHabeet(habeet);
   }
 
-  async getHabeets(): Promise<Habeet[]> {
-    const habeets = await this.habeetsRepository.getHabeets({});
-    return habeets;
+  getHabeets(id: number): Promise<Habeet[]> {
+    return this.habeetsRepository.getHabeets({where: {id}});
   }
 
   async getHabeet(id: Habeet['id']): Promise<Habeet> {
@@ -43,4 +32,10 @@ export class HabeetsService {
   }): Promise<HabeetStat> {
     return this.habeetsRepository.updateHabeetStat({ where: { id: habeetId }, data: { status, date } });
   }
+
+  async createHabeetStat({ habeetId, status }: { habeetId: number; status: Status }) {
+    return this.habeetsRepository.createHabeetStat({ habeetId, status });
+  }
+
+  //async getHabeetStats() {}
 }

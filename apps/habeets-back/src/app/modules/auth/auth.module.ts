@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { AuthController } from './auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './jwt.strategy';
 import { PrismaModule } from 'apps/habeets-back/src/database/prisma.module';
 import { UsersModule } from '../users/users.module';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { JwtStrategy } from './jwt.strategy';
 
-export const jwtSecret = 'zjP9h6ZI5LoblaSKClaRlaj';
+
+export const jwtSecret = 'zjP9h6ZIsswa5dLoSKCRj';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ export const jwtSecret = 'zjP9h6ZI5LoblaSKClaRlaj';
     PassportModule,
     JwtModule.register({
       secret: jwtSecret,
-      signOptions: { expiresIn: '1d' },
+      signOptions: { expiresIn: '5m' }, // e.g. 30s, 7d, 24h
     }),
     UsersModule,
   ],

@@ -1,13 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { Habeet, HabeetStat, Prisma } from '@prisma/client';
+import { Habeet, HabeetStat, Prisma, Status } from '@prisma/client';
 import { PrismaService } from 'apps/habeets-back/src/database/prisma.service';
+import { CreateHabeetDto } from './dtos/create-habeet.dto';
 
 @Injectable()
 export class HabeetsRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async createHabeet({ data }: { data: Prisma.HabeetCreateInput }): Promise<Habeet> {
-    return this.prismaService.habeet.create({ data });
+  async createHabeet({ title, userId }: CreateHabeetDto): Promise<Habeet> {
+    const createdHabeet = await this.prismaService.habeet.create({
+      data: {
+        title,
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
+      },
+    });
+
+    await this.createHabeetStat({ habeetId: createdHabeet.id, status: Status.SKIP });
+
+    return createdHabeet;
   }
 
   async getHabeets({
@@ -44,6 +58,19 @@ export class HabeetsRepository {
     return this.prismaService.habeet.findUnique({ where: { id } });
   }
 
+  async createHabeetStat({ habeetId, status }: { habeetId: number; status: Status }) {
+    return this.prismaService.habeetStat.create({
+      data: {
+        status: status,
+        habeet: {
+          connect: {
+            id: habeetId,
+          },
+        },
+      },
+    });
+  }
+
   async updateHabeetStat(params: {
     where: Prisma.HabeetStatWhereUniqueInput;
     data: Prisma.HabeetStatUpdateInput;
@@ -51,4 +78,21 @@ export class HabeetsRepository {
     const { where, data } = params;
     return this.prismaService.habeetStat.update({ where, data });
   }
+
+  async getHabeetStatsForHabeet(habeetId: number, params?: {
+    skip?: number;
+    take?: number;
+    cursor?: Prisma.HabeetStatWhereUniqueInput;
+    orderBy?: Prisma.HabeetStatOrderByWithRelationInput;
+  }) {
+    const { skip, take, cursor, orderBy } = params || {};
+    return this.prismaService.habeetStat.findMany({
+      where: { habeetId },
+      skip,
+      take,
+      cursor,
+      orderBy
+    });
+  }
+  
 }
