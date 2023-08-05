@@ -15,6 +15,7 @@
         "main": "apps/habeets/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/habeets/tsconfig.app.json",
+        "inlineStyleLanguage": "less",
         "assets": [
           "apps/habeets/src/favicon.ico",
           "apps/habeets/src/assets",

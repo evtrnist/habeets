@@ -53,6 +53,8 @@
     "@taiga-ui/core": "^3.39.1",
     "@taiga-ui/icons": "^3.39.1",
     "@taiga-ui/kit": "^3.39.1",
+    "@taiga-ui/layout": "^3.39.1",
+    "@taiga-ui/styles": "^3.39.1",
     "axios": "^1.0.0",
     "bcrypt": "^5.1.0",
     "class-transformer": "^0.5.1",

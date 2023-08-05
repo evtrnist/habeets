@@ -1,1 +1,37 @@
-<p>login-card works!</p>
+<section class="card-container">
+  <h2 class="card-container__title">Welcome!</h2>
+
+  <form [formGroup]="loginFormGroup">
+    <div class="card-container__field">
+      <tui-input class="card-container__input" formControlName="email">
+        Email
+        <input tuiTextfield type="email" />
+      </tui-input>
+
+      <tui-error class="card-container__error" formControlName="email" [error]="[] | tuiFieldError | async"></tui-error>
+    </div>
+    <div class="card-container__field">
+      <tui-input class="card-container__input" formControlName="password">
+        Password
+        <input tuiTextfield type="password" />
+      </tui-input>
+
+      <tui-error
+        class="card-container__error"
+        formControlName="password"
+        [error]="[] | tuiFieldError | async"
+      ></tui-error>
+    </div>
+  </form>
+
+  <div class="card-container__wrapper">
+    <button class="card-container__button" tuiButton type="submit">login</button>
+
+    <p class="tui-space_bottom-8">I forgot my password</p>
+
+    <p>
+      Don't have an acoount?
+      <a tuiLink [routerLink]="['/', 'signup']">Sign up</a>
+    </p>
+  </div>
+</section>
