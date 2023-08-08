@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { TuiValidationError } from '@taiga-ui/cdk';
+import { AuthService } from '../../auth-service';
 
 @Component({
   selector: 'habeets-login-card',
@@ -11,13 +12,21 @@ export class LoginCardComponent {
   public readonly loginFormGroup = new FormGroup({
     email: new FormControl('', {
       validators: [this.customRequiredValidator('Please enter your email')],
-      updateOn: 'blur'
+      updateOn: 'blur',
     }),
     password: new FormControl('', {
       validators: [this.customRequiredValidator('Please enter your password')],
-      updateOn: 'blur'
+      updateOn: 'blur',
     }),
   });
+
+  constructor(private readonly authService: AuthService) {}
+
+  public login(form: FormGroup) {
+    const { email, password } = form.value;
+    console.log(email, password);
+    this.authService.login(email, password);
+  }
 
   private customRequiredValidator(error = ''): (field: AbstractControl) => ValidationErrors | null {
     return (field: AbstractControl): ValidationErrors | null =>
