@@ -7,5 +7,5 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./signup-card.component.less'],
 })
 export class SignupCardComponent {
-  public signupFormGroup: FormGroup
+  public signupFormGroup: FormGroup = new FormGroup()
 }
