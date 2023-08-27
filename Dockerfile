@@ -1,25 +1,32 @@
-# Общий этап установки зависимостей
-FROM node:18-alpine as dependencies
+# Базовый образ
+FROM node:18 as base
+WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Этап сборки Angular приложения
-FROM dependencies as angular-build
-COPY ./apps/habeets ./apps/habeets
-RUN npm run nx build habeets --prod
+# Сборка Angular-приложения
+FROM base as angular-build
+COPY . .
+RUN npx nx build habeets --prod
 
-# Этап сборки NestJS приложения
-FROM dependencies as nestjs-build
-COPY ./apps/habeets-back ./apps/habeets-back
-RUN npm run nx build habeets-back --prod
+# Сборка NestJS-приложения
+FROM base as nestjs-build
+COPY . .
+RUN npx nx build habeets-back
 
-# Этап подготовки Angular приложения для запуска в контейнере
-FROM nginx:1.17.1-alpine as angular-final
-COPY --from=angular-build /app/dist/apps/habeets /usr/share/nginx/html
+# Финальный образ для Angular-приложения
+FROM nginx:alpine as angular-final
+COPY --from=angular-build /usr/src/app/dist/apps/habeets /usr/share/nginx/html
 
-# Этап подготовки NestJS приложения для запуска в контейнере
-FROM node:18-alpine as nestjs-final
-COPY --from=nestjs-build /app/dist/apps/habeets-back .
+# Финальный образ для NestJS-приложения
+FROM node:18 as nestjs-final
+WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
-RUN npm ci --production
-CMD ["node", "main"]
+RUN npm install --production
+COPY ./apps/habeets-back/src/database/schema.prisma ./apps/habeets-back/src/database/schema.prisma
+COPY --from=nestjs-build /usr/src/app/dist/apps/habeets-back ./dist/apps/habeets-back
+RUN npx prisma generate
+
+
+# Команда запуска NestJS-приложения
+CMD ["node", "dist/apps/habeets-back/main"]

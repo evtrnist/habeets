@@ -5,7 +5,6 @@ export class HabeetEntity implements Habeet {
     @ApiProperty()
     id: number;
 
-
     @ApiProperty()
     title: string;
 
