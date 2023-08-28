@@ -12,13 +12,13 @@ services:
       - 'postgres:/var/lib/postgresql/data'
     ports:
       - '5432:5432'
-  habeets-front:
+  habeets:
     build:
       context: .
       dockerfile: Dockerfile
       target: angular-final
     ports:
-      - "4200:4200"
+      - '4200:4200'
 
   habeets-back:
     depends_on:
@@ -28,9 +28,14 @@ services:
       dockerfile: Dockerfile
       target: nestjs-final
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - 'DATABASE_URL=${DATABASE_URL}'
-      
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - /nginx.conf
 volumes:
   postgres:
