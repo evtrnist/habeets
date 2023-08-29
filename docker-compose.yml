@@ -1,11 +1,13 @@
 version: '3'
 services:
   postgres:
-    image: postgres
+    image: postgres:15.4
     restart: always
+    container_name: postgres
     env_file:
       - .env
     environment:
+      - 'POSTGRES_DB=${POSTGRES_NAME}'
       - 'POSTGRES_USER=${POSTGRES_USER}'
       - 'POSTGRES_PASSWORD=${POSTGRES_PASSWORD}'
     volumes:
@@ -29,10 +31,12 @@ services:
       target: nestjs-final
     ports:
       - '3000:3000'
+    env_file:
+      - .env
     environment:
       - 'DATABASE_URL=${DATABASE_URL}'
   nginx:
-    image: nginx:latest
+    image: nginx:1.25.2
     ports:
       - "80:80"
     volumes:
