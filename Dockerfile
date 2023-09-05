@@ -15,9 +15,10 @@ COPY . .
 RUN npx nx build habeets-back
 
 # Финальный образ для Angular-приложения
-FROM nginx:alpine as angular-final
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=angular-build /usr/src/app/dist/apps/habeets /usr/share/nginx/html
+FROM node:18 as angular-final
+WORKDIR /usr/src/app
+COPY --from=angular-build /usr/src/app/dist/apps/habeets ./dist/apps/habeets
+CMD ["npx", "http-server", "-p", "80", "./dist/apps/habeets"]
 
 # Финальный образ для NestJS-приложения
 FROM node:18 as nestjs-final
