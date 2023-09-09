@@ -15,10 +15,9 @@ COPY . .
 RUN npx nx build habeets-back
 
 # Финальный образ для Angular-приложения
-FROM node:18 as angular-final
-WORKDIR /usr/src/app
-COPY --from=angular-build /usr/src/app/dist/apps/habeets ./dist/apps/habeets
-CMD ["npx", "http-server", "-p", "80", "./dist/apps/habeets"]
+FROM nginx:alpine as angular-final
+COPY --from=angular-build /usr/src/app/dist/apps/habeets /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 # Финальный образ для NestJS-приложения
 FROM node:18 as nestjs-final
@@ -28,6 +27,4 @@ RUN npm install --production
 COPY ./apps/habeets-back/src/database/schema.prisma ./apps/habeets-back/src/database/schema.prisma
 COPY --from=nestjs-build /usr/src/app/dist/apps/habeets-back ./dist/apps/habeets-back
 RUN npx prisma generate
-
-# Команда запуска NestJS-приложения
 CMD ["node", "dist/apps/habeets-back/main"]

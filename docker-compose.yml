@@ -37,16 +37,5 @@ services:
       ports:
         - "4200:80"
 
-  nginx:
-    build:
-      context: .
-    env_file:
-      - .env
-    ports:
-      - "80:80"
-    depends_on:
-      - habeets
-      - habeets-back
-
 volumes:
   postgres:

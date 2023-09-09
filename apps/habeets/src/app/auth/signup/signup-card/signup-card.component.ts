@@ -8,6 +8,6 @@ import { FormGroup } from '@angular/forms';
 })
 export class SignupCardComponent {
   public signupFormGroup: FormGroup = new FormGroup({
-    email
+    //email
   })
 }
