@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { TuiValidationError } from '@taiga-ui/cdk';
 import { AuthService } from '../../auth-service';
@@ -7,6 +7,7 @@ import { AuthService } from '../../auth-service';
   selector: 'habeets-login-card',
   templateUrl: './login-card.component.html',
   styleUrls: ['./login-card.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginCardComponent {
   public readonly loginFormGroup = new FormGroup({

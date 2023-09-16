@@ -1,4 +1,47 @@
 <section class="card-container">
-    <h2 class="card-container__title">Welcome!</h2>
-    <form [formGroup]="signupFormGroup"></form>
+  <h2 class="card-container__title">Welcome!</h2>
+  <form [formGroup]="signupFormGroup">
+    <div class="card-container__field">
+      <tui-input class="card-container__input" formControlName="email">
+        Email
+        <input tuiTextfield type="email" />
+      </tui-input>
+
+      <tui-error class="card-container__error" formControlName="email" [error]="[] | tuiFieldError | async"></tui-error>
+    </div>
+    <div class="card-container__field card-container__field_margin">
+      <tui-input class="card-container__input" formControlName="password">
+        Password
+        <input tuiTextfield type="password" />
+      </tui-input>
+
+      <tui-error
+        class="card-container__error"
+        formControlName="password"
+        [error]="[] | tuiFieldError | async"
+      ></tui-error>
+    </div>
+
+    <div class="card-container__field">
+      <tui-input class="card-container__input" formControlName="repeatedPassword">
+        Repeat your password
+        <input tuiTextfield type="password" />
+      </tui-input>
+
+      <tui-error
+        class="card-container__error"
+        formControlName="repeatedPassword"
+        [error]="[] | tuiFieldError | async"
+      ></tui-error>
+    </div>
+  </form>
+
+  <div class="card-container__wrapper">
+    <button class="card-container__button" tuiButton type="submit" (click)="signup(signupFormGroup)">sign up</button>
+
+    <p>
+      Already have an account?
+      <a tuiLink [routerLink]="['/', 'auth']">Log in</a>
+    </p>
+  </div>
 </section>

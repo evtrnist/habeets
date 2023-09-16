@@ -11,4 +11,8 @@ export class AuthService {
   public login(email: string, password: string) {
     return this.httpClient.post('/auth/login', { email, password }).pipe(map(console.log));
   }
+
+  public signup({email, password}: {email: string, password: string}) {
+    console.log(email, password)
+  }
 }
